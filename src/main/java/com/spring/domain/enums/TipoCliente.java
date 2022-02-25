@@ -29,9 +29,4 @@ public enum TipoCliente {
 	
 		throw new IllegalArgumentException("Id invalido: " + cod);
 	}
-
-	Integer getCod() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

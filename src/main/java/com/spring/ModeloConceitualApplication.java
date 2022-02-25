@@ -1,5 +1,6 @@
 package com.spring;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.spring.domain.Categoria;
 import com.spring.domain.Cidade;
+import com.spring.domain.Cliente;
+import com.spring.domain.Endereco;
 import com.spring.domain.Estado;
+import com.spring.domain.Pagamento;
+import com.spring.domain.PagamentoComBoleto;
+import com.spring.domain.Pedido;
 import com.spring.domain.Produto;
+import com.spring.domain.enums.EstadoPagamento;
+import com.spring.domain.enums.TipoCliente;
 import com.spring.repositories.CategoriaRepository;
 import com.spring.repositories.CidadeRepository;
+import com.spring.repositories.ClienteRepository;
+import com.spring.repositories.EnderecoRepository;
 import com.spring.repositories.EstadoRepository;
+import com.spring.repositories.PagamentoRepository;
+import com.spring.repositories.PedidoRepository;
 import com.spring.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -27,6 +39,14 @@ public class ModeloConceitualApplication implements CommandLineRunner {
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ModeloConceitualApplication.class, args);
@@ -34,27 +54,77 @@ public class ModeloConceitualApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		
 		Categoria cat1 = new Categoria(null, "Informatica");
 		Categoria cat2 = new Categoria(null, "Escritorio");
+		
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
 		
 		Produto p1 = new Produto(null, "Computador", 1500.00);
 		Produto p2 = new Produto(null, "Impressora", 180.00);
 		Produto p3 = new Produto(null, "Mouse", 15.00);
 		
+		p1.getCategorias().addAll(Arrays.asList(p1, p2, p3));
+		p2.getCategorias().addAll(Arrays.asList(p2, p3));
+		p3.getCategorias().addAll(Arrays.asList(p1));
+		
+		
 		Estado est1 = new Estado(null, "Minas gerais");
 		Estado est2 = new Estado(null, "Sao paulo");
+		
+		est1.getCidades().addAll(Arrays.asList(c2, c3));
+		
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
 		
 		Cidade c1 = new Cidade(null, "Uberlandia");
 		Cidade c2 = new Cidade(null, "Nova lima");
 		Cidade c3 = new Cidade(null, "Campinas");
 		
-		est1.getCidades().addAll(Arrays.asList(c1));
-		est2.getCidades().addAll(Arrays.asList(c2, c3));
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto302", "Jardim", "35425256", cli1, c1);
+		Endereco e2 = new Endereco(null, "Rua Abolicao", "14", "Apto102", "Esmeralda", "35428756", cli1, c2);
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "31548589", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("965458742", "982563636"));
+		cli1.getEndereco().addAll(Arrays.asList((e1, e2));
+		cl1.get
+		
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Pedido ped1 = new Pedido(null, sdf.parse("30/02/2021 10:23"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("11/05/2021 15:38"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComBoleto(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("25/08/2020 04:15"), null);
+		ped2.setPagamento(pagto2);
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		
+		
 	}
 	
 }

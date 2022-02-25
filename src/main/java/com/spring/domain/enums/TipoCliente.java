@@ -9,7 +9,7 @@ public enum TipoCliente {
 	private String descricao;
 	
 	private TipoCliente(int cod, String descricao) {
-		this.cod = cod;
+		this.setCod(cod);
 		this.descricao = descricao;
 	}
 
@@ -28,5 +28,13 @@ public enum TipoCliente {
 		}
 	
 		throw new IllegalArgumentException("Id invalido: " + cod);
+	}
+
+	public int getCod() {
+		return cod;
+	}
+
+	public void setCod(int cod) {
+		this.cod = cod;
 	}
 }

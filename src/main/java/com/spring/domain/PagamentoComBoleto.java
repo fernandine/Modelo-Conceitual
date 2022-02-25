@@ -29,6 +29,10 @@ public class PagamentoComBoleto extends Pagamento {
 		this.dataVencimento = dataVencimento;
 	}
 
+	public PagamentoComBoleto(Object object, EstadoPagamento quitado, Pedido ped1, int i) {
+
+	}
+
 	public Date getDataVencimento() {
 		return dataVencimento;
 	}

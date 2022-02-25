@@ -100,6 +100,11 @@ public class Produto  implements Serializable {
 			return false;
 		return true;
 	}
+
+	public List<Categoria> getItens() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

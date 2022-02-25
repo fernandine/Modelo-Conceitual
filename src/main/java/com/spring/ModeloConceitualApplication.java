@@ -68,25 +68,25 @@ public class ModeloConceitualApplication implements CommandLineRunner {
 		Produto p2 = new Produto(null, "Impressora", 180.00);
 		Produto p3 = new Produto(null, "Mouse", 15.00);
 		
+		p1.getCategorias().add((Categoria) Arrays.asList(p1, p2, p3));
+		p2.getCategorias().add((Categoria) Arrays.asList(p2, p3));
+		p3.getCategorias().add((Categoria) Arrays.asList(p1));
+		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
-		
-		p1.getCategorias().addAll(Arrays.asList(p1, p2, p3));
-		p2.getCategorias().addAll(Arrays.asList(p2, p3));
-		p3.getCategorias().addAll(Arrays.asList(p1));
 		
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		
 		Estado est1 = new Estado(null, "Minas gerais");
 		Estado est2 = new Estado(null, "Sao paulo");
-		
-		est1.getCidades().addAll(Arrays.asList(c1));
-		est2.getCidades().addAll(Arrays.asList(c2, c3));
-		
+
 		Cidade c1 = new Cidade(null, "Uberlandia");
 		Cidade c2 = new Cidade(null, "Nova lima");
 		Cidade c3 = new Cidade(null, "Campinas");
+		
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
@@ -97,7 +97,7 @@ public class ModeloConceitualApplication implements CommandLineRunner {
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto302", "Jardim", "35425256", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua Abolicao", "14", "Apto102", "Esmeralda", "35428756", cli1, c2);
 		
-		cli1.getEndereco().addAll(Arrays.asList(e1, e2));
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
@@ -124,9 +124,9 @@ public class ModeloConceitualApplication implements CommandLineRunner {
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
 		
-		p1.getItens().addAll(Arrays.asList(ip1));
-		p2.getItens().addAll(Arrays.asList(ip3));
-		p3.getItens().addAll(Arrays.asList(ip2));
+		p1.getItens().add((Categoria) Arrays.asList(ip1));
+		p2.getItens().add((Categoria) Arrays.asList(ip3));
+		p3.getItens().add((Categoria) Arrays.asList(ip2));
 		
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		

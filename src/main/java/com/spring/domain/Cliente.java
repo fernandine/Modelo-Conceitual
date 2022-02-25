@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -35,6 +35,9 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	public Cliente(Object object, String string, String string2, String string3, TipoCliente pessoafisica) {
+	}
+
 	@JsonIgnore
 	private String senha;
 	
@@ -90,9 +93,6 @@ public class Cliente implements Serializable {
 		return TipoCliente.toEnum(tipo);
 	}
 
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
-	}
 
 	public String getSenha() {
 		return senha;
